@@ -2,7 +2,7 @@ using PirateShooting;
 using System;
 using System.Collections.Generic;
 using System.Text;
-
+using System.Threading;
 namespace PirateGame {
     public class Program {
 
@@ -11,43 +11,45 @@ namespace PirateGame {
             Canhao canhaoo = new Canhao();
 
             bool sair = false;
-            
-            while(!sair) {  
 
-            Console.WriteLine("Digite: || [1] Para atirar || [2] Para Limpar o Canhao || [3] Para Recarregar o Canhao || [4] Para Sair");
-            String resposta = Console.ReadLine();
-                Console.WriteLine("--------------------------");
-            switch (resposta) {
+            while (!sair) {
 
-                case "1":
+                Console.WriteLine("Digite: || [1] Para atirar || [2] Para Limpar o Canhao || [3] Para Recarregar o Canhao || [4] Para Sair");
+                String resposta = Console.ReadLine();
+                Console.WriteLine("---------------------------------");
+                switch (resposta) {
 
-                    canhaoo.Atirar();
-                    canhaoo.Acertar();
-                    break;
+                    case "1":
 
-                case "2":
+                        canhaoo.Atirar();
+                        canhaoo.Acertar();
+                        break;
 
-                    canhaoo.Limpar();
-                    break;
+                    case "2":
 
-                case "3":
+                        canhaoo.Limpar();
+                        break;
 
-                    canhaoo.Recarregar();
-                    break;
+                    case "3":
 
-                case "4":
+                        canhaoo.Recarregar();
+                        break;
 
-                    Console.WriteLine("Terminando programa");
-                    Console.ReadKey();
-                    sair = true;
-                    break;
+                    case "4":
 
-                 default:
+                        Console.WriteLine("Terminando programa");
+                        Console.ReadKey();
+                        sair = true;
+                        break;
 
-                    Console.WriteLine("A Espera de ordens, Capitao");
-                    break;
+                    default:
+
+                        Console.WriteLine("A Espera de ordens, Capitao");
+                        Thread.Sleep(290);
+                        Console.Clear();
+                        break;
+                }
             }
-         }
         }
     }
 }
