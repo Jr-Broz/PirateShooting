@@ -4,13 +4,21 @@ using PirateGame;
 using System.Text;
 using System.Threading;
 using System.Diagnostics.Contracts;
+using System.ComponentModel;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
+
 namespace PirateGame {
-    public class Canhao {
+    public class Canhao : pyhsicalCombat {
 
-        string atirar, limpar, recarregar;
+        protected string atirar, limpar, recarregar;
 
-        bool estaRecarregado, estaSujo, Executavel, foiAtirado, AtirarDenovo;
+        protected bool estaRecarregado, estaSujo, Executavel, foiAtirado, AtirarDenovo;
+
+        public static int atirouQuantasVezes = 0;
+
         Random acertar;
+
+
 
         //Shoot cannon
         public string Atirar() {
@@ -41,11 +49,15 @@ namespace PirateGame {
             return this.atirar;
         }
 
+
+
+
+
         //Clean cannon
         public string Limpar() {
 
             do {
-                
+
                 limpar = "CANHÃO LIMPO, PRONTO PARA RECARREGAR, CAPITAO";
                 estaSujo = true;
 
@@ -56,11 +68,11 @@ namespace PirateGame {
 
                     if (resposta == "sim" || resposta == "Sim" || resposta == "s" || resposta == "S" || resposta == "SIM") {
 
-                     
 
-                    Console.WriteLine("ESTAMOS LIMPANDO O CANHAO, CAPITÃO!");
-                    Thread.Sleep(2000);
-                    Console.WriteLine(limpar);
+
+                        Console.WriteLine("ESTAMOS LIMPANDO O CANHAO, CAPITÃO!");
+                        Thread.Sleep(2000);
+                        Console.WriteLine(limpar);
                         estaSujo = false;
 
                     } else {
@@ -78,6 +90,8 @@ namespace PirateGame {
 
         }
 
+
+
         //Reload Cannon
         public string Recarregar() {
 
@@ -87,16 +101,16 @@ namespace PirateGame {
 
                     Thread.Sleep(290);
                     Console.WriteLine("Nao podemos recarregar pois o CANHAO ESTA SUJO");
-                   
+
                     Console.WriteLine("VOLTE UMA ETAPA PARA PODER CONTINUAR");
-                    
+
 
                 }
                 estaRecarregado = false;
                 recarregar = "Recarregando... ";
                 //Console.WriteLine(recarregar);
-                                     
-                
+
+
                 if (estaRecarregado == false && estaSujo == false) {
                     Console.WriteLine("ESTAMOS RECARREGANDO O CANHAO, CAPITAO!");
                     Thread.Sleep(3500);
@@ -117,16 +131,8 @@ namespace PirateGame {
 
 
 
-
-
-
-
-
-
-
-
-            //Check if you hit the other "Ship" or not.
-            public int Acertar() {
+        //Check if you hit the other "Ship" or not.
+        public int Acertar() {
 
             Random acertar = new Random();
 
@@ -141,5 +147,118 @@ namespace PirateGame {
             Console.WriteLine("---------------------------------");
             return 0;
         }
+
+
+        //Englobar todas as funções da interface nesta Funçao abaixo.
+        public void EntrarEmCombate() {
+
+
+
+
+
+            if (atirouQuantasVezes == 3) {
+
+                Console.WriteLine("Voce Pode entrar em combate Fisico com o inimigo. [1] Para sim || [2] Para nao");
+
+                int resposta = Int32.Parse((Console.ReadLine()));
+
+                switch(resposta) {
+
+                    case 1:
+
+                        EscolherArma();
+                        break;
+
+                    case 2:
+
+                        Console.WriteLine("Muito bem, Capitao, iremos afundar o navio.");
+                        break;
+                }
+
+
+
+
+
+            }
+        }
+
+
+
+      
+
+ 
+        //Feito, Acredito que feito.
+        public void EscolherArma() {
+
+            Console.WriteLine("Você entrou em combate físico, escolha entre a || [1] Cimitarra e uma  [2] Pederneira");
+
+            int resposta = Int32.Parse((Console.ReadLine()));
+
+                     
+            switch(resposta) {
+
+                case 1:
+
+                    Console.WriteLine("Você escolheu a Cimitarra");
+             
+                    break;
+
+                case 2:
+
+                    Console.WriteLine("Você escolheu a Pederneira");
+                    break;
+
+                default:
+
+                    Console.WriteLine("Como nenhuma arma foi escolhida, Você usará os punhos");
+                    break;
+            }
     }
+
+        //Rolar um dado para ver se acertou o Golpe.
+        public void Golpear() {
+
+            Random acertarGolpe = new Random();
+
+        int verAcerto =  acertarGolpe.Next(1, 20);
+
+            if(verAcerto >= 12) {
+
+
+
+            }
+
+        }
+
+       
+
+        public void ChecarSeAcertouGolpeFisico() {
+
+
+
+
+        }
+
+        //Provavel utilizar um d20 para rolar o dano 
+        public int receberDano() {
+
+            int hpUsuario = 30;
+
+            
+
+
+        }
+        public int darDano() {
+
+
+            Random darDano = new Random ();
+
+            int calcularDano = Convert.ToInt32((darDano.Next(1,20) * 1.5));
+
+        }
+
+
+    }
+
+
 }
