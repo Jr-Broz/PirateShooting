@@ -4,81 +4,129 @@ using PirateGame;
 using System.Text;
 using System.Threading;
 using System.Diagnostics.Contracts;
-
-namespace PirateShooting {
+namespace PirateGame {
     public class Canhao {
 
         string atirar, limpar, recarregar;
-        bool jaFoiAtirado;
-        bool estaLimpo;
-        bool estaRecarregado;
-        bool Executavel;
+
+        bool estaRecarregado, estaSujo, Executavel, foiAtirado, AtirarDenovo;
         Random acertar;
 
         //Shoot cannon
         public string Atirar() {
 
-            atirar = "ATIRANDO CANHÃO";
-            Console.WriteLine(atirar);
-            estaLimpo = false;
+            do {
 
-            if(estaLimpo == false) {
+                atirar = "ATIRANDO CANHÃO";
+                foiAtirado = false;
+                AtirarDenovo = false;
+                if (foiAtirado == false) {
 
+                    Console.WriteLine(atirar);
+                    Thread.Sleep(1500);
+                    foiAtirado = true;
+                }
 
-                Thread.Sleep(1500);
-                jaFoiAtirado = true;
-         }
-            
-            return this.atirar;            
-        }             
+                /*
+                if (foiAtirado == true && AtirarDenovo == false) {
+
+                    Console.WriteLine("VOCÊ JA ATIROU ESSE CANHÃO, VÁ PARA A PRÓXIMA ETAPA");
+                    foiAtirado = true;
+                    AtirarDenovo = false;
+                }
+                */
+            }
+            while (AtirarDenovo == true);
+
+            return this.atirar;
+        }
 
         //Clean cannon
         public string Limpar() {
 
-            limpar = "CANHÃO LIMPO, PRONTO PARA USO";
-            estaLimpo = false;
+            do {
+                
+                limpar = "CANHÃO LIMPO, PRONTO PARA RECARREGAR, CAPITAO";
+                estaSujo = true;
 
-            if(estaLimpo == false) {
+                if (estaSujo == true) {
 
-                Console.WriteLine("ESTAMOS LIMPANDO O CANHAO, CAPITÃO!");
-                Thread.Sleep(2000);
-                Console.WriteLine(limpar);
-                estaLimpo = true;
-                Executavel = true;
+                    Console.WriteLine("Voce quer limpar o canhao ?");
+                    string resposta = Console.ReadLine();
 
+                    if (resposta == "sim" || resposta == "Sim" || resposta == "s" || resposta == "S" || resposta == "SIM") {
 
-                if (Executavel == false && estaLimpo == true) {
+                     
 
+                    Console.WriteLine("ESTAMOS LIMPANDO O CANHAO, CAPITÃO!");
+                    Thread.Sleep(2000);
+                    Console.WriteLine(limpar);
+                        estaSujo = false;
 
-                    Console.WriteLine("Já ESTA LIMPO, NAO É PRECISO LIMPAR DENOVO.");
-                    Executavel = false;
+                    } else {
+
+                        Console.WriteLine("Ok, nao iremos limpar o canhão");
+                        Thread.Sleep(290);
+                        estaSujo = true;
+                    }
+
                 }
+                Console.WriteLine("---------------------------------");
+                return this.limpar;
             }
-            Console.WriteLine("---------------------------------");
-            return this.limpar;
-            
+            while (estaSujo == true);
+
         }
 
         //Reload Cannon
         public string Recarregar() {
 
-            recarregar = "Recarregando... ";
-            Console.WriteLine(recarregar);
-            estaRecarregado = false;
-            Executavel = true;  
+            do {
 
-            if(estaRecarregado == false) {
-                Console.WriteLine("ESTAMOS RECARREGANDO O CANHAO, CAPITAO!");
-                Thread.Sleep(3500);
-                Console.WriteLine("CANHÃO RECARREGADO E PRONTO PARA UTILIZAR!");
-                estaRecarregado = true;
+                if (estaSujo == true) {
+
+                    Thread.Sleep(290);
+                    Console.WriteLine("Nao podemos recarregar pois o CANHAO ESTA SUJO");
+                   
+                    Console.WriteLine("VOLTE UMA ETAPA PARA PODER CONTINUAR");
+                    
+
+                }
+                estaRecarregado = false;
+                recarregar = "Recarregando... ";
+                //Console.WriteLine(recarregar);
+                                     
                 
+                if (estaRecarregado == false && estaSujo == false) {
+                    Console.WriteLine("ESTAMOS RECARREGANDO O CANHAO, CAPITAO!");
+                    Thread.Sleep(3500);
+                    //return Limpar();
+                    Console.WriteLine("Canhao Recarregado");
+                }
+
+                Console.WriteLine("---------------------------------");
+                return recarregar;
             }
-            Console.WriteLine("---------------------------------");
-            return recarregar;
+            while (estaSujo == true);
+
         }
-        //Check if you hit the other "Ship" or not.
-        public int Acertar() {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            //Check if you hit the other "Ship" or not.
+            public int Acertar() {
 
             Random acertar = new Random();
 
@@ -88,7 +136,7 @@ namespace PirateShooting {
             } else {
 
                 Console.WriteLine("Acertamos capitao!");
-           
+
             }
             Console.WriteLine("---------------------------------");
             return 0;
