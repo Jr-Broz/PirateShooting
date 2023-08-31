@@ -95,7 +95,7 @@ namespace PirateGame {
         //Reload Cannon
         public string Recarregar() {
 
-            do {
+    //Removi o do - while pois estava causando problemas.       
 
                 if (estaSujo == true) {
 
@@ -123,8 +123,7 @@ namespace PirateGame {
 
                 Console.WriteLine("---------------------------------");
                 return recarregar;
-            }
-            while (estaSujo == true);
+            
 
         }
 
