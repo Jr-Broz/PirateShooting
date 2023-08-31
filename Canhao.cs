@@ -93,37 +93,27 @@ namespace PirateGame {
 
 
         //Reload Cannon
-        public string Recarregar() {
+        public void Recarregar() {
 
     //Removi o do - while pois estava causando problemas.       
+      if (estaSujo == true) {
 
-                if (estaSujo == true) {
+                Thread.Sleep(290);
+                Console.WriteLine("Nao podemos recarregar pois o CANHAO ESTA SUJO");
 
-                    Thread.Sleep(290);
-                    Console.WriteLine("Nao podemos recarregar pois o canhao esta sujo");          
-                    return Limpar();
-                }
-                estaRecarregado = false;
-                recarregar = "Recarregando... ";
-                //Console.WriteLine(recarregar);
+                Console.WriteLine("VOLTE UMA ETAPA PARA PODER CONTINUAR");
+        
+                 Limpar();
+            }
+            estaRecarregado = false;
+            recarregar = "Recarregando... ";
+            //Console.WriteLine(recarregar);
 
-
-                if(foiAtirado == true) {
-
-                    return "Nao podemos atirar, é preciso limpar e recarregar"; 
-                }
-
-
-                if (estaRecarregado == false && estaSujo == false) {
-                    Console.WriteLine("ESTAMOS RECARREGANDO O CANHAO, CAPITAO!");
-                    Thread.Sleep(3500);
-                    //return Limpar();
-                    Console.WriteLine("Canhao Recarregado");
-                }
-
-                Console.WriteLine("---------------------------------");
-                return recarregar;
-            
+            if (estaRecarregado == false && estaSujo == false) {
+                Console.WriteLine("ESTAMOS RECARREGANDO O CANHAO, CAPITAO!");
+                Thread.Sleep(3500);
+                Console.WriteLine("Canhao recarregado");
+            }
 
         }
 
