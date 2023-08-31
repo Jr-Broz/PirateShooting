@@ -7,16 +7,15 @@ namespace PirateGame {
         static void Main(string[] args) {
 
             Canhao canhaoo = new Canhao();
-
             bool sair = false;
+            Console.ForegroundColor= ConsoleColor.Cyan;
 
             while (!sair) {
 
                 Console.WriteLine("Digite: || [1] Para atirar || [2] Para Limpar o Canhao || [3] Para Recarregar o Canhao || [4] Para Sair");
                 Console.WriteLine("-------------------------------------------------------------------------------------------------------");
                 String resposta = Console.ReadLine();
-      
-                
+
                 switch (resposta) {
 
                     case "1":
@@ -37,7 +36,7 @@ namespace PirateGame {
 
                     case "4":
 
-                        Console.WriteLine("Terminando programa");                  
+                        Console.WriteLine("Saindo do Jogo...");
                         sair = true;
                         break;
 
