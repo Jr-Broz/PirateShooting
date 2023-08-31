@@ -21,32 +21,26 @@ namespace PirateGame {
         public string Atirar() {
 
 
-                atirar = "ATIRANDO CANHÃO";
-                foiAtirado = false;
-                if (foiAtirado == false) {
+            atirar = "ATIRANDO CANHÃO";
+            foiAtirado = false;
+            if (foiAtirado == false) {
 
-                    Console.WriteLine(atirar);
-                    Thread.Sleep(1500);
-                    foiAtirado = true;
-                    AtirarDenovo = false;
-                }
+                Console.WriteLine(atirar);
+                Thread.Sleep(1500);
+                foiAtirado = true;
+                AtirarDenovo = false;
+            }
+    
+            /*
+            if (foiAtirado == true && AtirarDenovo == false) {
 
-                if(foiAtirado == true) {
+                Console.WriteLine("VOCÊ JA ATIROU ESSE CANHÃO, VÁ PARA A PRÓXIMA ETAPA");
+                foiAtirado = true;
+                AtirarDenovo = false;
+            }
+            */
 
-                    NaoPodeAtirar();
-                }
-
-                /*
-                if (foiAtirado == true && AtirarDenovo == false) {
-
-                    Console.WriteLine("VOCÊ JA ATIROU ESSE CANHÃO, VÁ PARA A PRÓXIMA ETAPA");
-                    foiAtirado = true;
-                    AtirarDenovo = false;
-                }
-                */
- 
             return this.atirar;
-
         }
 
 
@@ -95,8 +89,7 @@ namespace PirateGame {
         //Reload Cannon
         public void Recarregar() {
 
-    //Removi o do - while pois estava causando problemas.       
-      if (estaSujo == true) {
+            if (estaSujo == true) {
 
                 Thread.Sleep(290);
                 Console.WriteLine("Nao podemos recarregar pois o CANHAO ESTA SUJO");
@@ -114,24 +107,17 @@ namespace PirateGame {
                 Thread.Sleep(3500);
                 Console.WriteLine("Canhao recarregado");
             }
-
         }
 
-        //Check if you hit the other "Ship" or not.
+
         public void Acertar() {
 
             Random acertar = new Random();
 
-
-
             if (acertar.Next(1, 10) % 2 != 0) {
-
-
 
                 Console.WriteLine("Malditos olhos, Erramos! ");
             } else {
-
-
 
                 Console.WriteLine("Acertamos capitao!");
                 acertouQuantasVezes = acertouQuantasVezes + 1;
@@ -145,18 +131,7 @@ namespace PirateGame {
 
         }
 
-
-        public void NaoPodeAtirar() {
-
-            
-            Console.WriteLine("Nao podemos atirar, pois nao está recarregado");
-        }
-
-
-
-
         public void EntrarEmCombate() {
-
 
             if (acertouQuantasVezes == 3) {
 
@@ -180,7 +155,6 @@ namespace PirateGame {
             }
         }    //Voltar para esse ponto.
 
-
         public void EscolherArma() {
 
             Console.WriteLine("Você entrou em combate físico, escolha entre: || [1] Cimitarra [2] Pederneira [3] Punhos");
@@ -196,8 +170,8 @@ namespace PirateGame {
 
                 case 2:
 
-                    Console.WriteLine("Você escolheu a Pederneirs.");
-                   AtirarTiro();
+                    Console.WriteLine("Você escolheu a Pederneira.");
+                    AtirarTiro();
                     break;
 
                 case 3:
@@ -216,7 +190,7 @@ namespace PirateGame {
 
                 Random acertarGolpe = new Random();
 
-                Console.WriteLine("Voce Golpeia o Inimigo...");
+                Console.WriteLine("Voce tenta acertar o Inimigo...");
                 Thread.Sleep(1500);
 
                 int verAcerto = acertarGolpe.Next(1, 20);
@@ -227,21 +201,21 @@ namespace PirateGame {
                     Console.WriteLine("Voce acertou o golpe");
                     Console.WriteLine("-----------------------------------");
                     darDano();
-              
+
 
                 } else {
 
                     Console.WriteLine("Voce errou o golpe");
                     Console.WriteLine("-----------------------------------");
                     receberDano();
-                  
+
                 }
             }
 
-            while (hpInimigo >= 0 || hpUsuario >= 0);
+            while (hpInimigo >= 0  == true|| hpUsuario >= 0 == true);
             return 0;
 
-        }  
+        }
 
         //Provavel utilizar um d20 para rolar o dano 
         public int receberDano() {
@@ -251,7 +225,6 @@ namespace PirateGame {
             int calcularDano = Convert.ToInt32((receberDano.Next(1, 20) * 1.5) / 2);
 
             hpUsuario -= calcularDano;
-
             Console.WriteLine($"Voce foi golpeado! recebeu  {calcularDano}   pontos de dano.");
             Console.WriteLine($"Seu HP: {hpUsuario}");
             if (hpUsuario <= 0) {
@@ -278,12 +251,15 @@ namespace PirateGame {
             if (hpInimigo <= 0) {
 
                 Console.WriteLine("O inimigo Foi Derrotado!");
+                Console.WriteLine("Sua Tripulação toma o navio e todo o ouro nele!");
+                Thread.Sleep(450);
                 return 0;
             }
             return 0;
         }
 
 
+        //Alterei o AtirarTiro() Apagando a parte : TiroDado >= 5
         public void AtirarTiro() {
 
             Random atirar = new Random();
@@ -291,14 +267,14 @@ namespace PirateGame {
 
             int tiroDado = atirar.Next(1, 10);
 
-            if (tiroDado >= 6 && tiroDado >= 5) {
-
+            if (tiroDado >= 6) {
+                Console.WriteLine("-----------------------------------");
                 Console.WriteLine("Voce acertou um tiro");
                 darDano();
-            } 
-            else {
+            } else {
 
                 Console.WriteLine("Voce errou o tiro");
+                Console.WriteLine("-----------------------------------");
                 receberDano();
             }
         }
