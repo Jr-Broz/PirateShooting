@@ -7,7 +7,5 @@
 ### Features to Add:
 
 
- - Check if  cannon is dirty or not if it is, it will not be able to try to clean it up again.
- - to physically engage Combat with another captain. 
-  - add damage, weapons mechanics. 
+ - **95% Ready**
 
