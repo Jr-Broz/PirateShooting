@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using PirateGame;
 using System.Text;
 using System.Threading;
@@ -10,42 +9,39 @@ namespace PirateGame {
     public class Canhao : pyhsicalCombat {
 
         protected string atirar, limpar, recarregar;
-        protected bool estaRecarregado, estaSujo, Executavel, foiAtirado, AtirarDenovo;
+        protected bool estaRecarregado, estaSujo, Executavel, foiAtirado;
         public static int acertouQuantasVezes = 0;
-
         public static Random hpDoInimigo = new Random();
         public static int hpInimigo = hpDoInimigo.Next(15, 20);
         public static int hpUsuario = 20;
+        bool estaTentandoAtirarNovamente;
 
         //Shoot cannon
-        public string Atirar() {
-
-
+        public void Atirar() {
+    
             atirar = "ATIRANDO CANHÃO";
             foiAtirado = false;
+
             if (foiAtirado == false) {
 
                 Console.WriteLine(atirar);
-                Thread.Sleep(1500);
+                Thread.Sleep(1200);
                 foiAtirado = true;
-                AtirarDenovo = false;
+                estaTentandoAtirarNovamente = false;
+                estaSujo = true;
+                estaRecarregado = false;
             }
-    
-            /*
-            if (foiAtirado == true && AtirarDenovo == false) {
 
-                Console.WriteLine("VOCÊ JA ATIROU ESSE CANHÃO, VÁ PARA A PRÓXIMA ETAPA");
-                foiAtirado = true;
-                AtirarDenovo = false;
+            if (foiAtirado == true && estaTentandoAtirarNovamente == true) {
+
+                Console.WriteLine("Nao podemos atirar denovo");
             }
-            */
 
-            return this.atirar;
         }
-
 
         //Clean cannon
         public string Limpar() {
+
 
             do {
 
@@ -54,8 +50,6 @@ namespace PirateGame {
 
 
                 if (estaSujo == true) {
-
-
 
                     Console.WriteLine("Voce quer limpar o canhao ?");
                     string resposta = Console.ReadLine();
@@ -82,12 +76,11 @@ namespace PirateGame {
                 return this.limpar;
             }
             while (estaSujo == true);
-
         }
-
 
         //Reload Cannon
         public void Recarregar() {
+
 
             if (estaSujo == true) {
 
@@ -95,8 +88,8 @@ namespace PirateGame {
                 Console.WriteLine("Nao podemos recarregar pois o CANHAO ESTA SUJO");
 
                 Console.WriteLine("VOLTE UMA ETAPA PARA PODER CONTINUAR");
-        
-                 Limpar();
+
+                Limpar();
             }
             estaRecarregado = false;
             recarregar = "Recarregando... ";
@@ -114,12 +107,18 @@ namespace PirateGame {
 
             Random acertar = new Random();
 
+
+
             if (acertar.Next(1, 10) % 2 != 0) {
+
+
 
                 Console.WriteLine("Malditos olhos, Erramos! ");
             } else {
 
-                Console.WriteLine("Acertamos capitao!");
+
+
+                Console.WriteLine("Acertamos o Tiro, capitao!");
                 acertouQuantasVezes = acertouQuantasVezes + 1;
                 if (acertouQuantasVezes == 3) {
 
@@ -132,6 +131,7 @@ namespace PirateGame {
         }
 
         public void EntrarEmCombate() {
+
 
             if (acertouQuantasVezes == 3) {
 
@@ -182,7 +182,6 @@ namespace PirateGame {
         }
 
         //Rolar um dado para ver se acertou o Golpe.
-
         public int Golpear() {
 
 
@@ -212,7 +211,7 @@ namespace PirateGame {
                 }
             }
 
-            while (hpInimigo >= 0  == true|| hpUsuario >= 0 == true);
+            while (hpInimigo >= 0 == true || hpUsuario >= 0 == true);
             return 0;
 
         }
@@ -247,7 +246,6 @@ namespace PirateGame {
             Console.WriteLine("----------------------------------------------");
             Console.WriteLine($"HP do inimigo: {hpInimigo}");
 
-
             if (hpInimigo <= 0) {
 
                 Console.WriteLine("O inimigo Foi Derrotado!");
@@ -276,6 +274,17 @@ namespace PirateGame {
                 Console.WriteLine("Voce errou o tiro");
                 Console.WriteLine("-----------------------------------");
                 receberDano();
+            }
+        }
+
+        public void JogarAutomatico() {
+           
+            for(int i = 1; i <= 3; i++) { 
+
+                Atirar();
+                Acertar();
+                Limpar();
+                Recarregar();
             }
         }
     }
