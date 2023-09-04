@@ -13,7 +13,7 @@ namespace PirateGame {
 
         void AtirarTiro();
 
-        int Golpear();
+        void Golpear();
  
         int darDano();
         int receberDano();
