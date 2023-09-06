@@ -1,7 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 namespace PirateGame {
     interface pyhsicalCombat {
@@ -14,7 +11,7 @@ namespace PirateGame {
         void AtirarTiro();
 
         void Golpear();
- 
+
         int darDano();
         int receberDano();
     }
