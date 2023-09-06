@@ -1,10 +1,6 @@
 using System;
 using PirateGame;
-using System.Text;
 using System.Threading;
-using System.Diagnostics.Contracts;
-using System.ComponentModel;
-using System.Runtime.Remoting.Metadata.W3cXsd2001;
 namespace PirateGame {
     public class Canhao : pyhsicalCombat {
 
@@ -220,10 +216,6 @@ namespace PirateGame {
                 Console.WriteLine("Voce derrotou o Inimigo");
 
             }
-            if(hpUsuario == 0) {
-
-                Console.WriteLine("Voce foi derrotado");
-            }
         }
         //Utilizando um d20 para rolar o dano 
         public int receberDano() {
@@ -282,16 +274,6 @@ namespace PirateGame {
                 Console.WriteLine("Voce errou o tiro");
                 Console.WriteLine("-----------------------------------");
                 receberDano();
-            }
-        }
-        public void JogarAutomatico() {
-           
-            for(int i = 1; i <= 3; i++) { 
-
-                Atirar();
-                Acertar();
-                Limpar();
-                Recarregar();
             }
         }
     }
