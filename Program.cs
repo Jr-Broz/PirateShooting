@@ -12,7 +12,8 @@ namespace PirateGame {
 
             while (!sair) {
 
-                Console.WriteLine("Digite: || [1] Para atirar || [2] Para Limpar o Canhao || [3] Para Recarregar o Canhao || [4] Para Jogar no automatico || [5] para Sair");
+                Console.WriteLine("Digite: || [1] Para atirar || [2] Para Limpar o Canhao || [3] Para Recarregar o Canhao || [4] Para Sair do Programa.");
+                Console.WriteLine("");
                 Console.WriteLine("[Voce pode atirar com o Canhão 2 vezes]");
                 Console.WriteLine("-------------------------------------------------------------------------------------------------------");
                 String resposta = Console.ReadLine();
@@ -36,21 +37,14 @@ namespace PirateGame {
                         break;
 
                     case "4":
-
-                        canhaoo.JogarAutomatico();                    
-                        break;
-
-                    case "5":
-
                         Console.WriteLine("Saindo do Jogo... espere um pouco");
                         sair = true;
                         Thread.Sleep(1000);
                         Environment.Exit(1);
                         System.Environment.Exit(1);
-                        break;
 
-
-                    default:
+                        break;  
+                        default:
 
                         Console.WriteLine("A Espera de ordens, Capitao");
                         Thread.Sleep(390);
